@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f5;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,26 +8,59 @@ body {
     align-items: center;
     height: 100vh;
     flex-direction: column;
-    /* padding: auto; */
 }
 
 .add {
-    display :flex;
-    gap :20px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
     margin: 10px 0;
 }
-input{
-    width: 150px;
-    border-radius: 10px;
 
+input {
+    padding: 10px 20px;
+    width: 180px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+button {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    border: none;
+    color: white;
 }
 
 #delete {
-    background-color: #ff4d4d; /* A lighter red for better readability */
-    border-radius: 10px;
+    background-color: #ff4d4d;
+}
+
+#delete:hover {
+    background-color: #e60000;
 }
 
 #update {
-    background-color: #4caf50; /* A standard green color */
-    border-radius: 10px;
+    background-color: #4caf50;
+}
+
+#update:hover {
+    background-color: #45a049;
+}
+
+#add {
+    background-color: #1c32c3;
+    width: 60px;
+}
+
+#add:hover {
+    background-color: #1627a6;
 }
