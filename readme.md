@@ -13,4 +13,4 @@ This is a simple Todo List application built with HTML, CSS, and JavaScript. It 
 1. Clone the repository:
    ```bash
    git clone https://github.com/melkemk/todo-list-app.git
-![App Screenshot](screenshot.png)
+![App Screenshot](Screenshot.png)
