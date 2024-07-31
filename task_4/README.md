@@ -1,6 +1,6 @@
-# Simple Todo List App
+# Simple Todo List App in React
 
-This is a simple Todo List application built with HTML, CSS, and TypeScript. It allows users to add, edit, and delete tasks, and stores the tasks in local storage.
+This is a simple Todo List application built with React. It allows users to add, edit, and delete tasks, and stores the tasks in local storage.
 
 ## Features
 
@@ -12,6 +12,14 @@ This is a simple Todo List application built with HTML, CSS, and TypeScript. It 
 ## Installation
 
 1. Clone the repository:
-   ```bash
    git clone https://github.com/melkemk/todo-list-app.git
+Navigate to the project directory:
+cd task_4
+
+install dependencies: 
+npm install
+
+Start the development server:
+npm run dev
+
 ![App Screenshot](Screenshot.png)
