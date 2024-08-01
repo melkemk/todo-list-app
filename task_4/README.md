@@ -22,4 +22,4 @@ npm install
 Start the development server:
 npm run dev
 
-![App Screenshot](Screenshot.png)
+![App Screenshot](Screenshott.png)
