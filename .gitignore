@@ -2,3 +2,4 @@
 /tic
 /task
 .gitignore
+node_modules
