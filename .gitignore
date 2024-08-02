@@ -3,3 +3,4 @@
 /task
 .gitignore
 node_modules
+/examples

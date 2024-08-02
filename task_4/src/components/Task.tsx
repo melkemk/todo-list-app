@@ -1,7 +1,6 @@
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
 import { useState } from "react";
 import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 

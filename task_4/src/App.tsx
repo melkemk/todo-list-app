@@ -46,7 +46,7 @@ function App() {
   }, [value]);
 
   function handleClick() {
-    if (tasks.includes(value) || value === '') {
+    if (tasks.includes(value) || value.trim() === '') {
       setValue('');
       return;
     }
