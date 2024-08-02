@@ -19,7 +19,7 @@ const ContactForm = () => {
                         {...register('name', { required: 'Name is required' })}
                         className="name"
                     />
-                    {errors.name && <span style={{color:'red'}}>{errors.name.message as string}</span>}
+                    <center>{errors.name && <span style={{color:'red'}}>{errors.name.message as string}</span>} </center>
                 </div>
                 <input type="email" placeholder="Email" {...register('email',{required:('email is required '),pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
