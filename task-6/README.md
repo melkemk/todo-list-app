@@ -49,10 +49,3 @@ This is a job listing application built using Next.js and Tailwind CSS. It inclu
 ### Applicants Dashboard
 ![Applicants Dashboard](./screenshots-2.png)
 
-## Contributing
-
-If you have any suggestions or improvements, feel free to open a pull request or issue.
-
-## License
-
-This project is licensed under the MIT License.
