@@ -1,40 +1,58 @@
+# Job Listing Application
 
-    <h1>Job Listing Application</h1>
+## Overview
 
-    <h2>Overview</h2>
-    <p>This is a job listing application built using Next.js and Tailwind CSS. It includes a job card component populated with dummy data and an avatar image, as well as an applicants dashboard.</p>
+This is a job listing application built using Next.js and Tailwind CSS. It includes a job card component populated with dummy data and an avatar image, as well as an applicants dashboard.
 
-    <h2>Features</h2>
-    <ul>
-        <li><strong>Job Card Component</strong>: A visually appealing card with layout, colors, and typography based on the provided UI reference.</li>
-        <li><strong>Dummy Data</strong>: Populated fields such as name, title, and description using static JSON data.</li>
-        <li><strong>Avatar Image</strong>: Incorporated avatar images from a given URL.</li>
-        <li><strong>Applicants Dashboard</strong>: Description of jobs styled using Tailwind CSS.</li>
-    </ul>
+## Features
 
-    <h2>Installation</h2>
-    <ol>
-        <li>Clone the repository:
-            <pre><code>git clone https://github.com/melkemk/todo-list-app
-cd task-6</code></pre>
-        </li>
-        <li>Install dependencies:
-            <pre><code>npm install</code></pre>
-        </li>
-        <li>Run the development server:
-            <pre><code>npm run dev</code></pre>
-        </li>
-    </ol>
+- **Job Card Component**: A visually appealing card with layout, colors, and typography based on the provided UI reference.
+- **Dummy Data**: Populated fields such as name, title, and description using static JSON data.
+- **Avatar Image**: Incorporated avatar images from a given URL.
+- **Applicants Dashboard**: Description of jobs styled using Tailwind CSS.
 
-    <h2>Usage</h2>
-    <ol>
-        <li>Open your browser and navigate to <code>http://localhost:3000</code>.</li>
-        <li>Browse through the job listings and view the applicants' dashboard.</li>
-    </ol>
+## Installation
 
-    <h2>Screenshots</h2>
-    <h3>Job Card Component</h3>
-    <img src="screenshots-1.png" alt="Job Card">
-    <h3>Applicants Dashboard</h3>
-    <img src="screenshots-2.png" alt="Applicants Dashboard">
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/melkemk/todo-list-app
+    cd task-6
+    ```
 
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+3. Run the development server:
+    ```sh
+    npm run dev
+    ```
+
+## Usage
+
+1. Open your browser and navigate to `http://localhost:3000`.
+2. Browse through the job listings and view the applicants' dashboard.
+
+## File Structure
+
+- `components/Card.js`: The card component.
+- `pages/index.js`: Main page displaying job listings.
+- `styles/globals.css`: Global styles using Tailwind CSS.
+- `public/avatars`: Avatar images.
+
+## Screenshots
+
+### Job Card Component
+![Job Card](./screenshots-1.png)
+
+### Applicants Dashboard
+![Applicants Dashboard](./screenshots-2.png)
+
+## Contributing
+
+If you have any suggestions or improvements, feel free to open a pull request or issue.
+
+## License
+
+This project is licensed under the MIT License.
