@@ -32,7 +32,6 @@ function Signin() {
       });
       const user = response.data.data;
       if (user) {
-        // Store user data in cookies
         Cookies.set('user', JSON.stringify({
           id: user.id,
           email: user.email,

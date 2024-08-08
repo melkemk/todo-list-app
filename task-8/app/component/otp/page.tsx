@@ -119,13 +119,13 @@ function Otp() {
               type="submit"
               className="w-[408px] h-[50px] p-[12px_24px] gap-[10px] rounded-[80px] flex items-center justify-center"
               style={{
-                backgroundColor: values[0] !== '' ? 'rgba(70, 64, 222, 1)' : 'rgba(70, 64, 222, 0.3)',
+                backgroundColor: values.map((value) => value.trim()).join('').length === 4? 'rgba(70, 64, 222, 1)' : 'rgba(70, 64, 222, 0.3)',
                 borderWidth: '1px',
                 borderStyle: 'solid',
                 color: 'white',
               }}
               value="Continue"
-              disabled={  values[0].includes(' ') }
+              disabled={  values.map((value) => value.trim()).join('').length !== 4}
             />
           </form>
         </div>

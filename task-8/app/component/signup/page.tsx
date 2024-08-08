@@ -23,7 +23,6 @@ const Separator = () => {
 function Signup() {
 
   const { data: session } = useSession();
-  console.log(session)
   const router = useRouter();
   const [userexist,setUserexist] = useState(false)
   const dispatch = useDispatch();
@@ -38,12 +37,18 @@ function Signup() {
   
   const onSubmit = async (data) => {
 
+    console.log(data)
     try {
-      
+      const response = await axiosInstance.post('/signup', {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+      console.log(response,102)
       dispatch(setFullName(data.name));
       dispatch(setEmail(data.email));
       dispatch(setPassword(data.password));
-      router.push('/component/otp')
+      router.push('/component/otp');
     } catch (error) {
       setUserexist(true)
       console.error('Registration error:', error.response ? error.response.data : error.message);
@@ -54,7 +59,6 @@ function Signup() {
 
    
   const handleGoogleSignIn = async () => {
-    console.log(11)
     try {
       await signIn('google', { callbackUrl: '/' });
     } catch (error) {
