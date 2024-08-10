@@ -12,6 +12,7 @@ interface Job {
 }
 
 const HomePage = () => {
+  alert(1111)
   const [jobs, setJobs] = useState<Job[]>([]);
   useEffect(() => {
     fetch('/api/jobs')

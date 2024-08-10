@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { signIn } from "next-auth/react";
 
 const Separator = () => {
   return (
@@ -23,33 +24,24 @@ function Signin() {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { data: session } = useSession(); // Get the session data
 
-  const onSubmit = async (data) => {
-    console.log(data)
+  console.log(session,'from signin');
+  const onSubmit = async (data: { email: any; password: any; }) => {
+    console.log(data);
     try {
-      const response = await axios.post('https://akil-backend.onrender.com/login', {
+      const result = await signIn("credentials", {
+        redirect: false,
         email: data.email,
         password: data.password,
       });
-      const user = response.data.data;
-      if (user) {
-        Cookies.set('user', JSON.stringify({
-          id: user.id,
-          email: user.email,
-          accessToken: user.accessToken,
-          refreshToken: user.refreshToken,
-          name: user.name,
-          profilePicUrl: user.profilePicUrl,
-          role: user.role,
-          profileComplete: user.profileComplete,
-          profileStatus: user.profileStatus,
-        }), { expires: 1 }); // Expires in 1 day
-   router.push('/')
+  
+      if (result?.ok) {
+       
+        router.push('/');
       } else {
-        throw new Error('Login failed');
+        throw new Error(result?.error || 'Login failed');
       }
     } catch (error) {
       console.error('Login error:', error);
-      
     }
   };
   

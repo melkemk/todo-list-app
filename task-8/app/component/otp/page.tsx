@@ -27,7 +27,8 @@ function Otp() {
     
     );
 
-    console.log(response)
+    router.push('/');
+
     } catch (error) {
       console.error('Registration error:', error.response ? error.response.data : error.message);
     }
