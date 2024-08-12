@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import React from 'react';
-import Joblist from './component/joblist';
+import Joblist from './component/jobCard';
 import { IoIosArrowDown } from 'react-icons/io';
 import Cookies from 'js-cookie';
 import { useSession } from 'next-auth/react';
@@ -12,19 +12,21 @@ import { useRouter } from 'next/navigation';
 import axiosInstance from './axiosConfig';
 
 interface Job {
-  id: string; // Added id here, assuming it exists in your job data
+  id: string;
   title: string;
   company: string;
   description: string;
 }
 
 async function fetchBookmarks(token: string) {
+  console.log(token,'token1');
   try {
     const response = await axiosInstance.get('/bookmarks', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
     });
+    console.log(response.data,'response.data1');
     return response.data;
   } catch (error) {
     console.error('Error fetching bookmarks:', error);
@@ -34,6 +36,7 @@ async function fetchBookmarks(token: string) {
 
 const HomePage = () => {
   const { data } = useSession();
+
   
   const userCookie = Cookies.get('user');
   const userName = userCookie ? JSON.parse(userCookie).name : null;
@@ -41,22 +44,28 @@ const HomePage = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [bookmarked, setBookmarked] = useState<Set<string>>(new Set());
   const [showBookmarks, setShowBookmarks] = useState<boolean>(false);
-
-  // Fetch all jobs or bookmarked jobs based on showBookmarks state
+  console.log(data,'data1')
+  
   useEffect(() => {
-    if (showBookmarks && data?.user?.accessToken) {
+    console.log((data?.user.accessToken),'token34')
+    if (data?.user?.accessToken) {
       fetchBookmarks(data.user.accessToken).then((result) => {
-        const bookmarkedJobs = new Set(result.data.map((job: Job) => job.eventID));
-        setBookmarked(bookmarkedJobs);
-        setJobs(jobs.filter((job) => bookmarkedJobs.has(job.id)));
+        if (Array.isArray(result.data)) {
+          const bookmarkedJobs = new Set(result.data.map((job: Job) => job.eventID));
+          setBookmarked(bookmarkedJobs);
+          setJobs(jobs.filter((job) => bookmarkedJobs.has(job.id)));
+        }
       });
-    } else {
-      fetch('https://akil-backend.onrender.com/opportunities/search')
-        .then((response) => response.json())
-        .then((data) => setJobs(data.data))
-        .catch((error) => console.error('Error fetching data:', error));
     }
-  }, [data?.user?.accessToken, showBookmarks]);
+  }, [data?.user?.accessToken]);
+  
+  useEffect(() => {
+    fetch('https://akil-backend.onrender.com/opportunities/search')
+      .then((response) => response.json())
+      .then((data) => setJobs(data.data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+  
 
   const logout = () => {
     Cookies.remove('user');
@@ -107,7 +116,7 @@ const HomePage = () => {
               Opportunities
             </div>
             <div className="font-epilogue text-[16px] font-normal leading-[25.6px] text-left text-[rgba(124,132,147,1)]">
-              Showing {jobs.length} results
+              Showing { jobs?jobs.length:0} results
             </div>
           </div>
           <div className="flex items-center mt-4 md:mt-0">
@@ -121,14 +130,15 @@ const HomePage = () => {
           </div>
         </div>
         {jobs.map((job, index) => (
-          <Joblist
+          (!showBookmarks || bookmarked.has(job.id)) ? <Joblist
             bookmarked={bookmarked}
             setBookmarked={setBookmarked}
+            token = {data?.user?.accessToken}
             logoUrl={""}
             index={index}
             key={index}
             {...job}
-          />
+          />:null
         ))}
       </div>
     </div>

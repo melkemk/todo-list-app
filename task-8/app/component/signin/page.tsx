@@ -3,7 +3,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react";
@@ -20,13 +19,12 @@ const Separator = () => {
 
 function Signin() {
   const router = useRouter()
-  console.log(Cookies.get('user'))
+  // console.log(Cookies.get('user'))
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
-  const { data: session } = useSession(); // Get the session data
-
-  console.log(session,'from signin');
+  const { data: session } = useSession(); 
+  // console.log(session,'from signin');
   const onSubmit = async (data: { email: any; password: any; }) => {
-    console.log(data);
+    // console.log(data);
     try {
       const result = await signIn("credentials", {
         redirect: false,
@@ -50,9 +48,9 @@ function Signin() {
     <div>
       <div className="flex justify-center h-auto align-middle text-base sm:mt-[141px]  mt-[1px] mb-[100px]">
         <div className="flex flex-col max-w-[408px] gap-[24px]">
-          <p className="font-poppins text-4xl font-extrabold leading-[38.4px] text-center">
+          <h1 className="font-poppins text-4xl font-extrabold leading-[38.4px] text-center">
             Welcome Back,
-          </p>
+          </h1>
           
           <form action="" className="flex flex-col max-w-[408px] gap-[24px]" onSubmit={handleSubmit(onSubmit)}>
 
@@ -105,7 +103,7 @@ function Signin() {
         </div>
       </div>
     </div>
-  );
-}
+  ); 
+} 
  
 export default Signin; 

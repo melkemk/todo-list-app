@@ -37,14 +37,14 @@ function Signup() {
   
   const onSubmit = async (data) => {
 
-    console.log(data)
+    // console.log(data)
     try {
       const response = await axiosInstance.post('/signup', {
         name: data.name,
         email: data.email,
         password: data.password,
       });
-      console.log(response,102)
+      // console.log(response,102)
       dispatch(setFullName(data.name));
       dispatch(setEmail(data.email));
       dispatch(setPassword(data.password));

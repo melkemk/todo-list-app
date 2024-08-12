@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import axiosInstance from "../axiosConfig";
-import { useSession } from "next-auth/react";
 import { MdBookmark } from "react-icons/md";
+import axios from "axios";
 
 interface Job {
   id: string;
@@ -12,13 +11,17 @@ interface Job {
   index: number;
   logoUrl: string;
   bookmarked: Set<string>;
+  token:string,
   setBookmarked: React.Dispatch<React.SetStateAction<Set<string>>>;
 }
 
-const addBookmark = async (id: string, token: any) => {
+
+const addBookmark = async (id: string, token: string) => {
+  console.log("Adding bookmark for job:", id,token);
+  console.log(token,'token1')
   try {
-    const response = await axiosInstance.post(
-      `/bookmarks/${id}`,
+    const response = await axios.post(
+      `https://akil-backend.onrender.com/bookmarks/${id}`,
       {},
       {
         headers: {
@@ -26,48 +29,46 @@ const addBookmark = async (id: string, token: any) => {
         },
       }
     );
-    if (response.status === 200) {
-      return true;
-    } else {
-      console.log("Failed to bookmark job");
-    }
+    return response.status === 200;
   } catch (error) {
     console.error("Error bookmarking job:", error);
+    return false;
   }
-  return false;
 };
 
-const removeBookmark = async (id: string, token: any) => {
+const removeBookmark = async (id: string, token: string) => {
+  console.log("Removing bookmark for job:", id);
   try {
-    const response = await axiosInstance.delete(`/bookmarks/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (response.status === 200) {
-      return true;
-    } else {
-      console.log("Failed to remove bookmark");
-    }
+    const response = await axios.delete(
+      `https://akil-backend.onrender.com/bookmarks/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.status === 200;
   } catch (error) {
     console.error("Error removing bookmark:", error);
+    return false;
   }
-  return false;
 };
 
-const Joblist: React.FC<Job> = (props) => {
-  const { id, description, company, title, logoUrl, bookmarked, setBookmarked } = props;
+
+
+const Joblist: React.FC<Job> = (props) => { 
+  const { token,id, description, company, title, logoUrl, bookmarked, setBookmarked, } = props;
+  console.log(bookmarked, 'bookmarked')
   const isBookmarked = bookmarked.has(id);
-  const { data } = useSession();
 
   const handleBookmarkClick = async () => {
-    if (!data?.user?.accessToken) {
+    if (!token) {
       console.log("No access token available");
-      return;
+      return; 
     }
 
     if (isBookmarked) {
-      const result = await removeBookmark(id, data.user.accessToken);
+      const result = await removeBookmark(id, token);
       if (result) {
         setBookmarked((prev) => {
           const updated = new Set(prev);
@@ -77,7 +78,7 @@ const Joblist: React.FC<Job> = (props) => {
         console.log("Removed bookmark for job:", id);
       }
     } else {
-      const result = await addBookmark(id, data.user.accessToken);
+      const result = await addBookmark(id, token);
       if (result) {
         setBookmarked((prev) => {
           const updated = new Set(prev);
@@ -97,11 +98,10 @@ const Joblist: React.FC<Job> = (props) => {
         borderColor: "rgba(214, 221, 235, 1)",
       }}
     >
-      <div style={{ position: "absolute", right: "10px", top: "10px" }}>
+      <div style={{ position: "absolute", right: "10px", top: "10px" }} onClick={handleBookmarkClick} data-testid="bookmark-button">
         <MdBookmark
           size={30}
           color={isBookmarked ? "rgba(255, 184, 54, 1)" : "rgba(124, 132, 147, 1)"}
-          onClick={handleBookmarkClick}
         />
       </div>
       <div className="flex flex-row bg-white gap-[24px]">
