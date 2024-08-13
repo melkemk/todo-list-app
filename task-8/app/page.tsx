@@ -47,7 +47,6 @@ const HomePage = () => {
   console.log(data,'data1')
   
   useEffect(() => {
-    console.log((data?.user.accessToken),'token34')
     if (data?.user?.accessToken) {
       fetchBookmarks(data.user.accessToken).then((result) => {
         if (Array.isArray(result.data)) {

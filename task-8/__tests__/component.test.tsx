@@ -34,7 +34,6 @@ describe('Joblist Component', () => {
 
     const bookmarkButton = screen.getByTestId('bookmark-button');
     
-    // Unbookmark the job (currently bookmarked)
     fireEvent.click(bookmarkButton);
 
     await waitFor(() => {
@@ -49,13 +48,11 @@ describe('Joblist Component', () => {
       );
     });
 
-    // Update job to reflect unbookmarked state
     job = {
       ...job,
       bookmarked: new Set<string>(), // Update the job state to reflect that it is no longer bookmarked
     };
 
-    // Re-render component with updated job state
     rerender(<Joblist index={1} {...job} />);
 
     // Bookmark the job again

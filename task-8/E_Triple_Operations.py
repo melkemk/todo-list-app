@@ -21,12 +21,23 @@ def solve():
     ans = 0 
     i = r  
     j = bisect_left(ar,r) 
-    while i>=l:
-        print(i-3**bisect_left(ar,i),i,j) 
-        j-=1 
-        ans += (i-3**bisect_left(ar,i))*(bisect_right(ar,i) )
-        i = (3**j)-1 
-    print(ans)
+    if i  not in  ar:
+        ans += (i-3**bisect_left(ar,i)+1)*(bisect_right(ar,i) )
+        i = 3**j 
+    t = bisect_right(ar,l)
+    z = l
+    if l not in ar:
+        
+        jj = l 
+        l = 3**t
+        i = l 
+        ans += ((l-jj)+1)*(bisect_right(ar,i) )
+    r = bisect_left(ar,r)
+    l = bisect_left(ar,z)
+    while r!=l:
+        ans += ()
+        
+    
         
     
 
